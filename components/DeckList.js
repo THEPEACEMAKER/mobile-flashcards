@@ -1,7 +1,8 @@
 import React, { Component } from "react"
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/decks'
+import DeckCard from './DeckCard'
 
 class DeckList extends Component {
   componentDidMount() {
@@ -9,24 +10,25 @@ class DeckList extends Component {
   }
 
   render() {
-    const { navigation } = this.props
+    const { decksIds } = this.props
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
-        <Text>DeckList View</Text>
-        <TouchableOpacity
-          style={{margin: 10, padding: 10, borderColor: 'black', borderWidth: 1,}}
-          onPress={() => navigation.navigate(
-            'Deck',
-            {
-              title: 'The First Deck'
-            }
-          )}
-        >
-            <Text>Deck 1</Text>
-        </TouchableOpacity>
+        <FlatList
+          data={decksIds}
+          renderItem={({ item }) => <DeckCard title={item} />}
+          keyExtractor={item => item}
+        />
       </View>
     )
   } 
 }
 
-export default connect()(DeckList)
+function mapStateToProps ({ decks }) {
+  const decksIds = Object.keys(decks)
+
+  return {
+    decksIds,
+  }
+}
+
+export default connect(mapStateToProps)(DeckList)
