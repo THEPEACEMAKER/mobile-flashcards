@@ -13,6 +13,7 @@ import { useHeaderHeight } from '@react-navigation/stack'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import reducer from './reducers';
+import middleware from './middleware'
 
 function TheStatusBar ({backgroundColor, ...props}) {
   return (
@@ -54,7 +55,7 @@ function DecksStack() {
   )
 }
 
-const store=createStore(reducer)
+const store=createStore(reducer, middleware)
 
 export default function App() {
   return (

@@ -1,7 +1,13 @@
 import React, { Component } from "react"
 import { View, Text, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/decks'
 
 class DeckList extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData()) // has access to the dispatch, because of the connect function
+  }
+
   render() {
     const { navigation } = this.props
     return (
@@ -23,4 +29,4 @@ class DeckList extends Component {
   } 
 }
 
-export default DeckList
+export default connect()(DeckList)
