@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, TouchableNativeFeedback, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'  // gives access to the navigation object
+import { useNavigation } from '@react-navigation/native'  // gives access to the navigation object,
+// it cannot be used in class components though, to use it You must wrap your class component in a function component
 
 function DeckCard (props) {
 	const { title, num } = props
@@ -13,13 +14,14 @@ function DeckCard (props) {
         onPress={() => navigation.navigate(
           'Deck',
           {
-            title: title
+            title: title,
+            num: num
           }
         )}
       >
         <View style={styles.item}>
           <Text style={styles.headerText}>{title}</Text>
-          <Text>{num === 1 ? `${num} card` : `${num} cards`}</Text>
+          <Text style={{color: 'grey',}}>{num === 1 ? `${num} card` : `${num} cards`}</Text>
         </View>
       </TouchableNativeFeedback>
     </View>

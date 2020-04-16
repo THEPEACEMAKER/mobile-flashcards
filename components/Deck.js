@@ -1,15 +1,17 @@
 import React, { Component } from "react"
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-class Deck extends Component {
-  render() {
-    const { route, navigation } = this.props
-    const { title } = route.params
+function Deck (props) {
+    const { route, navigation } = props
+    const { title, num } = route.params
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
-        <Text>Deck View</Text>
+      <View style={{flex: 1, alignItems: 'center',}}>
+        <View style={{height: '65%', justifyContent: 'center', alignItems: 'center',}}>
+          <Text style={[styles.headerText, {fontSize: 50,}]}>{title}</Text>
+          <Text style={{color: 'grey',}}>{num === 1 ? `${num} card` : `${num} cards`}</Text>
+        </View>
         <TouchableOpacity
-          style={{margin: 10, padding: 10, borderColor: 'black', borderWidth: 1,}}
+          style={styles.AndroidBtn}
           onPress={() => navigation.navigate(
             'NewCard',
             {
@@ -20,7 +22,7 @@ class Deck extends Component {
             <Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{margin: 10, padding: 10, borderColor: 'black', borderWidth: 1,}}
+          style={[styles.AndroidBtn, {backgroundColor: 'black',}]}
           onPress={() => navigation.navigate(
             'Quiz',
             {
@@ -28,11 +30,47 @@ class Deck extends Component {
             }
           )}
         >
-            <Text>Start Quiz</Text>
+            <Text style={{color: 'white',}}>Start Quiz</Text>
         </TouchableOpacity>
       </View>
     )
-  } 
 }
+
+const styles = StyleSheet.create({
+  item: {
+    flex: 1,
+    width: '90%',
+    backgroundColor: 'white',
+    borderRadius: 2,
+    padding: 20,
+    marginTop: 17,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+  },
+  headerText: {
+    fontSize: 30,
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  AndroidBtn: {
+    backgroundColor: 'white',
+    padding: 15,
+    paddingLeft: 60,
+    paddingRight: 60,
+    borderColor: 'black',
+    borderWidth: 2,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+})
 
 export default Deck
