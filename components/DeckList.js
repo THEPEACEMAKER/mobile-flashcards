@@ -12,8 +12,9 @@ class DeckList extends Component {
   render() {
     const { decksIds } = this.props
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+      <View>
         <FlatList
+          style={{width: '100%',}}
           data={decksIds}
           renderItem={({ item }) => <DeckCard title={item} />}
           keyExtractor={item => item}
