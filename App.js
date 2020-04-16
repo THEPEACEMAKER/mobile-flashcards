@@ -10,6 +10,9 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Constants from 'expo-constants'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useHeaderHeight } from '@react-navigation/stack'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import reducer from './reducers';
 
 function TheStatusBar ({backgroundColor, ...props}) {
   return (
@@ -51,13 +54,17 @@ function DecksStack() {
   )
 }
 
+const store=createStore(reducer)
+
 export default function App() {
   return (
-    <View style={{flex: 1}}>
-      <TheStatusBar backgroundColor={'grey'} barStyle="light-content" />
-      <NavigationContainer>
-        <DecksStack />
-      </NavigationContainer>
-    </View>
+    <Provider store={store}>
+      <View style={{flex: 1}}>
+        <TheStatusBar backgroundColor={'grey'} barStyle="light-content" />
+        <NavigationContainer>
+          <DecksStack />
+        </NavigationContainer>
+      </View>
+    </Provider>
   )
 }
