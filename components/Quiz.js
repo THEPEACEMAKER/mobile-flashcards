@@ -1,13 +1,14 @@
 import React, { Component } from "react"
 import { View, Text } from 'react-native'
+import QuizQuestion from './QuizQuestion'
 
 class Quiz extends Component {
   render() {
     const { title } = this.props.route.params
+    const question = 'What is React?'
+    const answer = 'A library for managing user interfaces'
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
-        <Text>Quiz View in {title}</Text>
-      </View>
+      <QuizQuestion question={question} answer={answer} />
     )
   } 
 }
