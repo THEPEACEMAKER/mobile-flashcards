@@ -2,7 +2,7 @@ import React from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 function QuizQuestion (props) {
-    const { question, answer, displayAnswer, showAnswer } = props
+    const { question, answer, displayAnswer, showAnswer, addAnswer } = props
 
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',}}>
@@ -13,12 +13,14 @@ function QuizQuestion (props) {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
+          onPress={() => addAnswer(true)}
           style={[styles.AndroidBtn, {backgroundColor: '#28a745',}]}
         >
             <Text style={styles.submitBtnText}>Correct</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => addAnswer(false)}
           style={[styles.AndroidBtn, {backgroundColor: '#dc3545',}]}
         >
             <Text style={styles.submitBtnText}>Incorrect</Text>
