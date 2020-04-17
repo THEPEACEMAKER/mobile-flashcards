@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { addCard } from '../actions/decks'
 
 class NewCard extends Component {
   state = {
@@ -16,6 +18,7 @@ class NewCard extends Component {
     const { title } = this.props.route.params
 
     // Update Redux
+    this.props.dispatch(addCard(title, question, answer))
 
     this.setState(() => ({ question: '', answer: '' })) // reset the state
 
@@ -80,4 +83,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NewCard
+export default connect()(NewCard)
