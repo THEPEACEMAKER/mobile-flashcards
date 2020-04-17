@@ -49,8 +49,8 @@ function DecksStack() {
       }}>
       <Stack.Screen name="DECKS" component={Tabs} options={{headerShown: false}} />
       <Stack.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.title })} />
-      <Stack.Screen name="NewCard" component={NewCard} options={{title: 'Add Card'}} />
-      <Stack.Screen name="Quiz" component={Quiz} options={{title: 'Quiz'}} />
+      <Stack.Screen name="NewCard" component={NewCard} options={({ route }) => ({ title: `Add Card To ${route.params.title}` })} />
+      <Stack.Screen name="Quiz" component={Quiz} options={({ route }) => ({ title: `${route.params.title} Quiz` })}  />
     </Stack.Navigator>
   )
 }
