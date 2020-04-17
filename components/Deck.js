@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 
 function Deck (props) {
-    const { route, navigation } = props
-    const { title, num } = route.params
+    const { title, num } = props
+    const navigation = useNavigation()
     return (
       <View style={{flex: 1, alignItems: 'center',}}>
         <View style={{height: '65%', justifyContent: 'center', alignItems: 'center',}}>
@@ -73,4 +75,14 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Deck
+function mapStateToProps ({ decks }, { route }) {
+  const { title } = route.params
+  const deck = decks[title]
+
+  return {
+    title: deck.title,
+    num: deck.questions.length,
+  }
+}
+
+export default connect(mapStateToProps)(Deck)

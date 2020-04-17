@@ -15,7 +15,6 @@ function DeckCard (props) {
           'Deck',
           {
             title: title,
-            num: num
           }
         )}
       >
@@ -57,7 +56,7 @@ function mapStateToProps ({ decks }, { title }) {
   const deck = decks[title]
 
   return {
-    deckTitle: deck.title,
+    title: deck.title,
     num: deck.questions.length,
   }
 }
