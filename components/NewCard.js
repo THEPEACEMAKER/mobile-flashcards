@@ -2,19 +2,48 @@ import React, { Component } from "react"
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 
 class NewCard extends Component {
+  state = {
+    question: '',
+    answer: '',
+  }
+
+  handleChange = (name, text) => {
+    this.setState({[name]: text});
+  }
+
+  submit = () => {
+    const { question, answer } = this.state
+    const { title } = this.props.route.params
+
+    // Update Redux
+
+    this.setState(() => ({ question: '', answer: '' })) // reset the state
+
+    // Navigate to parent deck
+
+    // Save to "DB" -> AsyncStorage
+  }
+
   render() {
     const { title } = this.props.route.params
+    const { question, answer } = this.state
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',}}>
           <TextInput
             style={[styles.input, {margin: 0,}]}
             placeholder="The Question"
+            value={question}
+            onChangeText={text => this.handleChange('question', text)}
           />
           <TextInput
             style={styles.input}
             placeholder="The Answer"
+            value={answer}
+            onChangeText={text => this.handleChange('answer', text)}
           />
           <TouchableOpacity
+            disabled={question === '' || answer === '' }
+            onPress={this.submit}
             style={[styles.AndroidBtn, {backgroundColor: 'black',}]}
           >
               <Text style={styles.submitBtnText}>Submit</Text>
