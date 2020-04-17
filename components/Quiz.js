@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { View, Text } from 'react-native'
 import QuizQuestion from './QuizQuestion'
+import QuizScore from './QuizScore'
 import { connect } from 'react-redux'
 
 class Quiz extends Component {
@@ -26,8 +27,17 @@ class Quiz extends Component {
 	  }))
 	}
 
+	resetQuiz = () => {
+    this.setState({
+	    displayedQuestion: 0,
+	    displayAnswer: false,
+	    answered: 0,
+	    score: 0,
+    })
+	}
+
   render() {
-  	const { questions } = this.props
+  	const { questions, title } = this.props
   	const { displayedQuestion, displayAnswer, answered, score } = this.state
   	if(answered !== questions.length){
   		const question = questions[displayedQuestion].question
@@ -43,7 +53,12 @@ class Quiz extends Component {
   	  )
   	}else{
   		return (
-  			<Text>{`Your score : ${score} / ${answered}`}</Text>
+  			<QuizScore
+  				score={score}
+  				answered={answered}
+  				resetQuiz={this.resetQuiz}
+  				title={title}
+  			/>
   		)
   	}
   } 
@@ -54,6 +69,7 @@ function mapStateToProps ({ decks }, { route }) {
   const deck = decks[title]
 
   return {
+  	title,
     questions: deck.questions,
   }
 }
