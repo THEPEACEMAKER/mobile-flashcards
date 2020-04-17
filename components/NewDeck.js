@@ -2,7 +2,31 @@ import React, { Component } from "react"
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native'
 
 class NewDeck extends Component {
+  state = {
+    title: '',
+  }
+
+  handleTextChange = (title) => {
+    this.setState(() => ({
+      title,
+    }))
+  }
+
+  submit = () => {
+    const title = this.state
+
+    // Update Redux
+
+    this.setState(() => ({ title: '' })) // reset the state
+
+    // Navigate to home
+
+    // Save to "DB" -> AsyncStorage
+  }
+
   render() {
+    const { title } = this.state
+
     return (
       <KeyboardAvoidingView
         style={{flex: 1, alignItems: 'center',height: '100%'}}
@@ -12,8 +36,11 @@ class NewDeck extends Component {
           <TextInput
             style={styles.input}
             placeholder="New Deck"
+            value={title}
+            onChangeText={this.handleTextChange}
           />
           <TouchableOpacity
+            onPress={this.submit}
             style={[styles.AndroidBtn, {backgroundColor: 'black',}]}
           >
               <Text style={styles.submitBtnText}>Submit</Text>
