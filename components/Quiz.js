@@ -49,6 +49,8 @@ class Quiz extends Component {
   	    	displayAnswer={displayAnswer}
   	    	showAnswer={this.showAnswer}
   	    	addAnswer={this.addAnswer}
+          answered={answered+1}
+          questionsNum={questions.length}
   	    />
   	  )
   	}else{
