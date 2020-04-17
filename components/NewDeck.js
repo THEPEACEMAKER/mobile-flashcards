@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions/decks'
 
 class NewDeck extends Component {
   state = {
@@ -13,9 +15,10 @@ class NewDeck extends Component {
   }
 
   submit = () => {
-    const title = this.state
+    const { title } = this.state
 
     // Update Redux
+    this.props.dispatch(addDeck(title))
 
     this.setState(() => ({ title: '' })) // reset the state
 
@@ -40,6 +43,7 @@ class NewDeck extends Component {
             onChangeText={this.handleTextChange}
           />
           <TouchableOpacity
+            disabled={title === ''}
             onPress={this.submit}
             style={[styles.AndroidBtn, {backgroundColor: 'black',}]}
           >
@@ -84,4 +88,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NewDeck
+export default connect()(NewDeck)
