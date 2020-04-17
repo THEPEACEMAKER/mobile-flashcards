@@ -6,15 +6,22 @@ import { connect } from 'react-redux'
 class Quiz extends Component {
 	state = {
 	  displayedQuestion: 0,
+	  displayAnswer: false,
+	}
+
+	showAnswer = () => {
+	  this.setState(currState => ({
+	    displayAnswer: !currState.displayAnswer,
+	  }));
 	}
 
   render() {
   	const { questions } = this.props
-  	const { displayedQuestion } = this.state
+  	const { displayedQuestion, displayAnswer } = this.state
     const question = questions[displayedQuestion].question
     const answer = questions[displayedQuestion].answer
     return (
-      <QuizQuestion question={question} answer={answer} />
+      <QuizQuestion question={question} answer={answer} displayAnswer={displayAnswer} showAnswer={this.showAnswer} />
     )
   } 
 }
