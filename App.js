@@ -10,10 +10,12 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Constants from 'expo-constants'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useHeaderHeight } from '@react-navigation/stack'
-import { createStore } from 'redux';
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './reducers';
+import reducer from './reducers'
 import middleware from './middleware'
+import { handleInitialData } from './actions/decks'
+import { AsyncStorage } from 'react-native'
 
 function TheStatusBar ({backgroundColor, ...props}) {
   return (
@@ -56,6 +58,18 @@ function DecksStack() {
 }
 
 const store=createStore(reducer, middleware)
+
+const STORAGE_KEY = 'completeStore'
+
+store.subscribe(() => {
+  let storingValue = JSON.stringify(store.getState())
+  AsyncStorage.setItem(STORAGE_KEY, storingValue)
+})
+
+// checking the storage for previous stored data
+AsyncStorage.getItem(STORAGE_KEY).then(JSON.parse).then((data) => {
+  store.dispatch(handleInitialData(data))
+})
 
 export default function App() {
   return (

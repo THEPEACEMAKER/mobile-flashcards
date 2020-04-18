@@ -51,9 +51,9 @@ const initialData = {
   }
 }
 
-// Redux thunk action creator, to check the AsyncStorage for data, before using the static initialData
-export function handleInitialData () {
-	return (dispatch) => {
-		return dispatch(receiveDecks(initialData))
-	}
+export function handleInitialData (data) {
+  return (dispatch) => {
+    // data === null : means there was no data stored in the storage
+    return dispatch(receiveDecks(data === null ? initialData : data['decks']))
+  }
 }
