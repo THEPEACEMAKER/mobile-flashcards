@@ -16,13 +16,21 @@ class NewDeck extends Component {
 
   submit = () => {
     const { title } = this.state
+    const titleToPass = title
+    const { navigation } = this.props
 
     // Update Redux
     this.props.dispatch(addDeck(title))
 
     this.setState(() => ({ title: '' })) // reset the state
 
-    // Navigate to home
+    // Navigate to the new deck
+    navigation.navigate(
+      'Deck',
+      {
+        title: titleToPass,
+      }
+    )
 
     // Save to "DB" -> AsyncStorage
   }
