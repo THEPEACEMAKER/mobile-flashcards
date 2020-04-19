@@ -2,8 +2,13 @@ import React, { Component } from "react"
 import { View, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import DeckCard from './DeckCard'
+import { setLocalNotification } from '../utils/helpers'
 
 class DeckList extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     const { decksIds } = this.props
     return (

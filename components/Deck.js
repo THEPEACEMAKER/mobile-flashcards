@@ -2,8 +2,13 @@ import React, { Component } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 function Deck (props) {
+  setNewNotification = () => {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
     const { title, num } = props
     const navigation = useNavigation()
     return (
@@ -25,12 +30,16 @@ function Deck (props) {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.AndroidBtn, {backgroundColor: 'black',}]}
-          onPress={() => navigation.navigate(
-            'Quiz',
-            {
-              title,
+          onPress={() => {
+              navigation.navigate(
+                'Quiz',
+                {
+                  title,
+                }
+              )
+              setNewNotification()
             }
-          )}
+          }
         >
             <Text style={{color: 'white',}}>Start Quiz</Text>
         </TouchableOpacity>
