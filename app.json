@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "mobile-flashcards",
+    "description": "This app allows you to create flashcard decks, add cards/questions to the decks and quiz yourself on each deck.",
     "slug": "mobile-flashcards",
     "platforms": [
       "ios",
@@ -26,6 +27,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "githubUrl": "https://github.com/THEPEACEMAKER/mobile-flashcards"
   }
 }
